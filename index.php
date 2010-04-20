@@ -6,32 +6,24 @@ $sounds = glob('*.wav');
   <title>Big Buttons</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
   <script>
-    $.fn.tempClass = function(className, milliseconds) {
-      className = className || 'active'
-      milliseconds = milliseconds || 500
-      $(this).each(function() {
-        var that = $(this).addClass(className)
-        setTimeout(function() { that.removeClass(className) }, milliseconds)
-      })
-    }
     $(document).ready(function() {
       $('audio').each(function(i) {
         var button = $(this).parent('button')
-        $(this)
-          .bind('dataunavailable', function() { button.addClass('dataunavailable') })
-          .bind('play', function() { button.addClass('playing').tempClass('active') })
-          .bind('ended', function() { button.removeClass('playing') })
+        $(this).bind('dataunavailable', function() { button.addClass('dataunavailable') })
+               .bind('ended', function() { button.removeClass('playing') })
       })
 
       $('button').live('click', function() {
-        $(this).addClass('playing').tempClass('active')
-        var audio = $(this).children('audio')[0]
+        var button = $(this),
+            audio = $(this).children('audio')[0]
+        button.addClass('playing').addClass('active')
+        setTimeout(function() { button.removeClass('active') }, 200)
         audio.currentTime = 0
         audio.play()
       })
+
       $(window).keypress(function(e) {
-        var letter = String.fromCharCode(e.charCode).toLowerCase(),
-            number = parseInt(letter, 10)
+        var number = parseInt(String.fromCharCode(e.charCode), 10)
         if (number)
           $('button').eq(number-1).click()
       })
@@ -39,8 +31,7 @@ $sounds = glob('*.wav');
   </script>
   <style>
     button { font: 2em Helvetica, sans-serif; margin:.5ex 0; border:0;
-      background:url(button.png) top left no-repeat; min-height:60px; padding-left:70px;
-      -moz-border-radius: 1ex; outline: none }
+      background:url(button.png) top left no-repeat; min-height:60px; padding-left:70px }
     button.active { background-position: bottom left }
     button.dataunavailable { opacity: .3 }
     button.playing { color: darkred }
@@ -51,7 +42,10 @@ $sounds = glob('*.wav');
   <ul>
 <? foreach ($sounds as $sound) : ?>
     <li>
-      <button><audio src="<?=htmlspecialchars($sound)?>" autobuffer></audio> <?=htmlspecialchars(basename($sound, '.wav'))?></button>
+      <button>
+        <audio src="<?=htmlspecialchars($sound)?>" autobuffer></audio>
+        <?=htmlspecialchars(basename($sound, '.wav'))?>
+      </button>
     </li>
 <? endforeach; ?>
   </ul>
