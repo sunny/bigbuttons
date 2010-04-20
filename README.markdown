@@ -1,4 +1,4 @@
-![Screenshot](http://wtf.sunfox.org/big-buttons.png)
+![Screenshot](http://dev.sunfox.org/bigbuttons/bigbuttons.png)
 
 Install
 =======
