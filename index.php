@@ -20,7 +20,8 @@ $sounds = glob('*.wav');
             audio = $(this).children('audio')[0]
         button.addClass('playing').addClass('active')
         setTimeout(function() { button.removeClass('active') }, 200)
-        audio.currentTime = 0
+        if (audio.currentTime)
+          audio.currentTime = 0
         audio.play()
       })
 
