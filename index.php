@@ -4,6 +4,7 @@ $sounds = glob('*.wav');
 <html lang="en">
 <head>
   <title>Big Buttons</title>
+  <meta charset=utf-8>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
   <script>
     $(document).ready(function() {
@@ -43,8 +44,9 @@ $sounds = glob('*.wav');
 <? foreach ($sounds as $sound) : ?>
     <li>
       <button>
-        <audio src="<?=htmlspecialchars($sound)?>" autobuffer></audio>
+        <audio src="<?=htmlspecialchars(urlencode($sound))?>" autobuffer></audio>
         <?=htmlspecialchars(basename($sound, '.wav'))?>
+
       </button>
     </li>
 <? endforeach; ?>
