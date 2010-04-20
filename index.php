@@ -12,6 +12,7 @@ $sounds = glob('*.wav');
         var button = $(this).parent('button')
         $(this).bind('dataunavailable', function() { button.addClass('dataunavailable') })
                .bind('ended', function() { button.removeClass('playing') })
+               .bind('error', function() { button.addClass('error') })
       })
 
       $('button').live('click', function() {
@@ -33,9 +34,10 @@ $sounds = glob('*.wav');
   <style>
     button { font: 2em Helvetica, sans-serif; margin:.5ex 0; border:0;
       background:url(button.png) top left no-repeat; min-height:60px; padding-left:70px }
-    button.active { background-position: bottom left }
-    button.dataunavailable { opacity: .3 }
-    button.playing { color: darkred }
+    .active { background-position: bottom left }
+    .dataunavailable,
+    .error { opacity: .3 }
+    .playing { color: darkred }
     ul { list-style:none; }
   </style>
 </head>
