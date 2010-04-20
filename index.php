@@ -48,7 +48,7 @@ $sounds = glob('*.wav');
     <li>
       <button>
         <audio src="<?=htmlspecialchars(urlencode($sound))?>" autobuffer></audio>
-        <?=htmlspecialchars(basename($sound, '.wav'))?>
+        <?=htmlspecialchars(str_replace('_', ' ', basename($sound, '.wav')))?>
 
       </button>
     </li>
