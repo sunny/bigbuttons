@@ -12,6 +12,7 @@ $sounds = glob('*.wav');
         var button = $(this).parent('button')
         $(this).bind('dataunavailable', function() { button.addClass('dataunavailable') })
                .bind('ended', function() { button.removeClass('playing') })
+               .bind('pause', function() { button.removeClass('playing') })
                .bind('error', function() { button.addClass('error') })
       })
 
@@ -26,6 +27,11 @@ $sounds = glob('*.wav');
       })
 
       $(window).keypress(function(e) {
+        // ESC pauses
+        if (e.charCode === 0) {
+          $('audio').each(function() { this.pause() })
+          return
+        }
         var number = parseInt(String.fromCharCode(e.charCode), 10)
         if (number)
           $('button').eq(number-1).click()
