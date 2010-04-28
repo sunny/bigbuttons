@@ -10,7 +10,7 @@ Install
 Usage
 =====
 
-Only works with Firefox (which supports HTML5 `<audio>` and `.wav` files), sorry.
+Works with browsers which support HTML5 `<audio>` and `.wav` files, that is Firefox 3.6 and Opera 10.5 (partially).
 
 Appart from clicking you may also use your keyboard :
 
