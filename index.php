@@ -8,18 +8,17 @@ $sounds = glob('*.wav');
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('audio').each(function(i) {
-        var button = $(this).parent('button')
-        $(this).bind('dataunavailable', function() { button.addClass('dataunavailable') })
-               .bind('ended', function() { button.removeClass('playing') })
-               .bind('pause', function() { button.removeClass('playing') })
-               .bind('error', function() { button.addClass('error') })
-      })
+      $('audio').live('dataunavailable', function() { $(this).parent().addClass('dataunavailable') })
+                .live('ended', function() { $(this).parent().removeClass('playing') })
+                .live('pause', function() { $(this).parent().removeClass('playing') })
+                .live('timeupdate', function() { $(this).parent().addClass('playing') })
+                .live('play', function() { $(this).parent().addClass('playing') })
+                .live('error', function() { $(this).parent().addClass('error') })
 
       $('button').live('click', function() {
         var button = $(this),
             audio = $(this).children('audio')[0]
-        button.addClass('playing').addClass('active')
+        button.addClass('active')
         setTimeout(function() { button.removeClass('active') }, 200)
         if (audio.currentTime)
           audio.currentTime = 0
