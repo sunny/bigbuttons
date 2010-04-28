@@ -7,7 +7,16 @@ $sounds = glob('*.wav');
   <meta charset=utf-8>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
   <script>
+    // Assign a class temporarily to an item (defaults to 200ms)
+    $.fn.temporaryClass = function(className, time) {
+      var that = $(this)
+      that.addClass(className)
+      setTimeout(function() { that.removeClass(className) }, time || 200)
+      return that
+    }
+
     $(document).ready(function() {
+      // Actions happen when audio moves
       $('audio').live('dataunavailable', function() { $(this).parent().addClass('dataunavailable') })
                 .live('ended', function() { $(this).parent().removeClass('playing') })
                 .live('pause', function() { $(this).parent().removeClass('playing') })
@@ -15,14 +24,16 @@ $sounds = glob('*.wav');
                 .live('play', function() { $(this).parent().addClass('playing') })
                 .live('error', function() { $(this).parent().addClass('error') })
 
+                // new audio event to simplify restarting
+                .live('restart', function() {
+                  if (this.currentTime)
+                    this.currentTime = 0
+                  this.play()
+                })
+
       $('button').live('click', function() {
-        var button = $(this),
-            audio = $(this).children('audio')[0]
-        button.addClass('active')
-        setTimeout(function() { button.removeClass('active') }, 200)
-        if (audio.currentTime)
-          audio.currentTime = 0
-        audio.play()
+        $(this).temporaryClass('active')
+               .children('audio').trigger('restart')
       })
 
       $(window).keypress(function(e) {
@@ -31,6 +42,8 @@ $sounds = glob('*.wav');
           $('audio').each(function() { this.pause() })
           return
         }
+
+        // 1->9 presses a button
         var number = parseInt(String.fromCharCode(e.charCode), 10)
         if (number)
           $('button').eq(number-1).click()
