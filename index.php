@@ -48,7 +48,7 @@ $sounds = glob('*.wav');
   </style>
 </head>
 <body>
-  <ul>
+  <ol>
 <? foreach ($sounds as $sound) : ?>
     <li>
       <button>
@@ -58,6 +58,6 @@ $sounds = glob('*.wav');
       </button>
     </li>
 <? endforeach; ?>
-  </ul>
+  </ol>
 </body>
 </html>
