@@ -51,13 +51,21 @@ $sounds = glob('*.wav');
     })
   </script>
   <style>
-    button { font: 2em Helvetica, sans-serif; margin:.5ex 0; border:0;
-      background:url(button.png) top left no-repeat; min-height:60px; padding-left:70px }
-    .active { background-position: bottom left }
-    .dataunavailable,
+    button {
+      width: 80px;
+      height: 84px;
+      padding-top:63px;
+      vertical-align:bottom;
+      border: none;
+      font: 13px/1 Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      margin:.5ex 0;
+      background:url(button.png) center 0 no-repeat; }
+    .active { background-position: center -84px }
+    .dataunavailable { opacity: .3 }
     .error { opacity: .3 }
     .playing { color: darkred }
-    ul { list-style:none; }
+    ol { list-style:none; }
+    li { float:left; }
   </style>
 </head>
 <body>
