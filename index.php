@@ -58,14 +58,14 @@ $sounds = glob('*.wav');
       vertical-align:bottom;
       border: none;
       font: 13px/1 Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      margin:.5ex 0;
-      background:url(button.png) center 0 no-repeat; }
+      margin:0 0 3em 0;
+      background:url(button.png) center 0 no-repeat }
     .active { background-position: center -84px }
     .dataunavailable { opacity: .3 }
     .error { opacity: .3 }
     .playing { color: darkred }
-    ol { list-style:none; }
-    li { float:left; }
+    ol { list-style:none; width: 750px; margin:1em auto }
+    li { float:left }
   </style>
 </head>
 <body>
