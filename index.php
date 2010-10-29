@@ -50,12 +50,13 @@
   </script>
   <style>
     button {
+      cursor: pointer;
       width: 80px;
       height: 84px;
       vertical-align:bottom;
       color: white;
       font: bold 13px/1 Helvetica, sans-serif;
-      margin: 5px;
+      margin: 10px;
 
       border: 2px solid #333;
       -webkit-border-radius: 40px;
@@ -67,13 +68,22 @@
       background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
       background: -moz-linear-gradient(-90deg, #666, #000);
 
-      -webkit-box-shadow: 2px 2px 20px rgba(0,0,0,.5);
-      -moz-box-shadow: 2px 2px 20px rgba(0,0,0,.5);
-      -o-box-shadow: 2px 2px 20px rgba(0,0,0,.5);
-      box-shadow: 2px 2px 20px rgba(0,0,0,.5); }
+      -webkit-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
+      -moz-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
+      -o-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
+      box-shadow: 2px 2px 20px rgba(0,0,0,.9);}
+
+    button:focus {
+      outline: 1px solid rgba(0,0,0,.1);
+      -webkit-outline-radius: 60px;
+      -moz-outline-radius: 60px;
+      -o-outline-radius: 60px;
+      outline-radius: 60px;}
+
+    button::-moz-focus-inner {
+      border: none; }
 
     .active {
-      border-color: #555;
       background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
       background: -moz-linear-gradient(-90deg, #555, #000); }
 
@@ -82,13 +92,13 @@
       opacity: .3 }
 
     .playing {
-      -webkit-box-shadow: 2px 2px 20px rgba(220,0,0,.5);
-      -moz-box-shadow: 2px 2px 20px rgba(220,0,0,.5);
-      -o-box-shadow: 2px 2px 20px rgba(220,0,0,.5);
-      box-shadow: 2px 2px 20px rgba(220,0,0,.5);}
+      -webkit-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
+      -moz-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
+      -o-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
+      box-shadow: 2px 2px 20px rgba(150,0,0,.9);}
 
     ol {
-      width: 850px;
+      width: 900px;
       margin:1em auto; }
     li {
       float:left;
