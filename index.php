@@ -1,6 +1,4 @@
-<?php
-$sounds = glob('*.wav');
-?><!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <title>Big Buttons</title>
@@ -54,27 +52,62 @@ $sounds = glob('*.wav');
     button {
       width: 80px;
       height: 84px;
-      padding-top:63px;
       vertical-align:bottom;
-      border: none;
-      font: 13px/1 Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      margin:0 0 3em 0;
-      background:url(button.png) center 0 no-repeat }
-    .active { background-position: center -84px }
-    .dataunavailable { opacity: .3 }
-    .error { opacity: .3 }
-    .playing { color: darkred }
-    ol { list-style:none; width: 750px; margin:1em auto }
-    li { float:left }
+      color: white;
+      font: bold 13px/1 Helvetica, sans-serif;
+      margin: 5px;
+
+      border: 2px solid #333;
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      -o-border-radius: 40px;
+      border-radius: 40px;
+
+      background: black;
+      background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
+      background: -moz-linear-gradient(-90deg, #666, #000);
+
+      -webkit-box-shadow: 2px 2px 20px rgba(0,0,0,.5);
+      -moz-box-shadow: 2px 2px 20px rgba(0,0,0,.5);
+      -o-box-shadow: 2px 2px 20px rgba(0,0,0,.5);
+      box-shadow: 2px 2px 20px rgba(0,0,0,.5); }
+
+    .active {
+      border-color: #555;
+      background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
+      background: -moz-linear-gradient(-90deg, #555, #000); }
+
+    .dataunavailable,
+    .error {
+      opacity: .3 }
+
+    .playing {
+      -webkit-box-shadow: 2px 2px 20px rgba(220,0,0,.5);
+      -moz-box-shadow: 2px 2px 20px rgba(220,0,0,.5);
+      -o-box-shadow: 2px 2px 20px rgba(220,0,0,.5);
+      box-shadow: 2px 2px 20px rgba(220,0,0,.5);}
+
+    ol {
+      width: 850px;
+      margin:1em auto; }
+    li {
+      float:left;
+      color: #aaa;
+      font: 13px/1 Helvetica, sans-serif;
+      list-style: none;}
+    li:nth-child(1), li:nth-child(2), li:nth-child(3),
+    li:nth-child(4), li:nth-child(5), li:nth-child(6),
+    li:nth-child(7), li:nth-child(8), li:nth-child(9) {
+      list-style-type: decimal; }
   </style>
 </head>
 <body>
   <ol>
-<? foreach ($sounds as $sound) : ?>
+<? foreach (glob('*.wav') as $sound) : ?>
     <li>
       <button>
         <audio src="<?=htmlspecialchars(urlencode($sound))?>" autobuffer></audio>
-        <?=htmlspecialchars(str_replace('_', ' ', basename($sound, '.wav')))?>
+        <?=htmlspecialchars(trim(preg_replace('/^[0-9]+|\.wav$|_+/i', ' ', $sound)))?>
 
       </button>
     </li>
