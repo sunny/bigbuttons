@@ -3,7 +3,7 @@
 <head>
   <title>Big Buttons</title>
   <meta charset=utf-8>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script>
     // Assign a class temporarily to an item (defaults to 200ms)
     $.fn.temporaryClass = function(className, time) {
