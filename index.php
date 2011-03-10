@@ -13,6 +13,33 @@
       return that
     }
 
+    // Keydown that disregards keys pressed with control or command
+    // and adds the keyName to the event
+    $.fn.singleKeyDown = function(callback) {
+      function keyName(code) {
+        if (code >= 96 && code <= 105)
+          return parseInt(code - 96)
+        switch (code) {
+          case 17: return 'control'
+          case 27: return 'escape'
+          case 224: return 'command'
+          default: return String.fromCharCode(code)
+        }
+      }
+      var upKeys = {}
+      $(this).keydown(function(e) {
+        e.keyName = keyName(e.keyCode)
+        if (e.keyName == 'control' || e.keyName == 'command')
+          upKeys[e.keyName] = true
+        else if (!upKeys.control && !upKeys.command)
+          return callback.call(this, e)
+      }).keyup(function(e) {
+        e.keyName = keyName(e.keyCode)
+        if (e.keyName == 'control' || e.keyName == 'command')
+          upKeys[e.keyName] = false
+      })
+    }
+
     $(document).ready(function() {
       // Actions happen when audio moves
       $('audio').live('dataunavailable', function() { $(this).parent().addClass('dataunavailable') })
