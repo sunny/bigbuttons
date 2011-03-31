@@ -5,6 +5,11 @@
   <meta charset=utf-8>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script>
+    // Keyboard keys that press buttons
+    // For qwerty, use:
+    //   var keyboard = '1234567890QWERTYIOPASDFGHJKL;ZXCVBN'
+    var keyboard = '1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'
+
     // Assign a class temporarily to an item (defaults to 200ms)
     $.fn.temporaryClass = function(className, time) {
       var that = $(this)
@@ -14,34 +19,26 @@
     }
 
     // Keydown that disregards keys pressed with control or command
-    // and adds the keyName to the event
+    // and adds the keyString to the event
     $.fn.singleKeyDown = function(callback) {
-      function keyName(code) {
+      function keyString(code) {
         if (code >= 96 && code <= 105)
           return parseInt(code - 96)
         switch (code) {
-          case 17: return 'control'
           case 27: return 'escape'
-          case 224: return 'command'
           default: return String.fromCharCode(code)
         }
       }
-      var upKeys = {}
-      $(this).keydown(function(e) {
-        e.keyName = keyName(e.keyCode)
-        if (e.keyName == 'control' || e.keyName == 'command')
-          upKeys[e.keyName] = true
-        else if (!upKeys.control && !upKeys.command)
+      return $(this).keydown(function(e) {
+        if (!e.ctrlKey && !e.metaKey) {
+          e.keyString = keyString(e.keyCode)
           return callback.call(this, e)
-      }).keyup(function(e) {
-        e.keyName = keyName(e.keyCode)
-        if (e.keyName == 'control' || e.keyName == 'command')
-          upKeys[e.keyName] = false
+        }
       })
     }
 
     $(document).ready(function() {
-      // Actions happen when audio moves
+      // Actions happen when audio plays
       $('audio').live('dataunavailable', function() { $(this).parent().addClass('dataunavailable') })
                 .live('ended', function() { $(this).parent().removeClass('playing') })
                 .live('pause', function() { $(this).parent().removeClass('playing') })
@@ -56,22 +53,30 @@
                   this.play()
                 })
 
-      $('button').live('click', function() {
+      // Show the keyboard keys to press
+      $('button').each(function(i) {
+        if (i < keyboard.length)
+          $(this).append('<span>' + keyboard[i] + '</span>')
+      })
+
+      // Clicking a button starts audio
+      .live('click', function() {
         $(this).temporaryClass('active')
                .children('audio').trigger('restart')
       })
 
       $(document).singleKeyDown(function(e) {
-        // escape pauses
-        if (e.keyName === 'escape') {
+        // Escape pauses
+        if (e.keyString === 'escape') {
           $('audio').each(function() { this.pause() })
           return
         }
 
-        // 1-9 + azerty presses a button
-        var azerty = ['A','Z','E','R','T','Y','U','I','O','P','Q','S','D','F','G','H','J','K','L','M','W','X','C','V','B','N'],
-            number = azerty.indexOf(e.keyName) != -1 ? azerty.indexOf(e.keyName) + 1 : e.keyName
-        $('button').eq(number-1).click()
+        // Keyboard presses buttons
+        var number = keyboard.indexOf(e.keyString)
+        if (number != -1)
+          $('button').eq(number).click()
+
       })
     })
   </script>
@@ -98,21 +103,30 @@
       -webkit-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
       -moz-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
       -o-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
-      box-shadow: 2px 2px 20px rgba(0,0,0,.9);}
+      box-shadow: 2px 2px 20px rgba(0,0,0,.9)}
 
     button:focus {
       outline: 1px solid rgba(0,0,0,.1);
       -webkit-outline-radius: 60px;
       -moz-outline-radius: 60px;
       -o-outline-radius: 60px;
-      outline-radius: 60px;}
+      outline-radius: 60px}
 
     button::-moz-focus-inner {
-      border: none; }
+      border: none}
+
+    button span {
+      color: grey;
+      font-size: .9em;
+      position: absolute;
+      top: 0;
+      left: 48%}
 
     .active {
       background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
-      background: -moz-linear-gradient(-90deg, #555, #000); }
+      background: -moz-linear-gradient(-90deg, #555, #000)}
+    .active span {
+      color: black}
 
     .dataunavailable,
     .error {
@@ -122,20 +136,18 @@
       -webkit-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
       -moz-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
       -o-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
-      box-shadow: 2px 2px 20px rgba(150,0,0,.9);}
+      box-shadow: 2px 2px 20px rgba(150,0,0,.9)}
 
     ol {
-      width: 900px;
-      margin:1em auto; }
+      width: 1000px;
+      margin:1em auto}
     li {
       float:left;
+      position: relative;
       color: #aaa;
       font: 13px/1 Helvetica, sans-serif;
-      list-style: none;}
-    li:nth-child(1), li:nth-child(2), li:nth-child(3),
-    li:nth-child(4), li:nth-child(5), li:nth-child(6),
-    li:nth-child(7), li:nth-child(8), li:nth-child(9) {
-      list-style-type: decimal; }
+      list-style: none;
+      padding-top: 5px}
   </style>
 </head>
 <body>
