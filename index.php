@@ -61,17 +61,17 @@
                .children('audio').trigger('restart')
       })
 
-      $(window).keypress(function(e) {
-        // ESC pauses
-        if (e.charCode === 0) {
+      $(document).singleKeyDown(function(e) {
+        // escape pauses
+        if (e.keyName === 'escape') {
           $('audio').each(function() { this.pause() })
           return
         }
 
-        // 1->9 presses a button
-        var number = parseInt(String.fromCharCode(e.charCode), 10)
-        if (number)
-          $('button').eq(number-1).click()
+        // 1-9 + azerty presses a button
+        var azerty = ['A','Z','E','R','T','Y','U','I','O','P','Q','S','D','F','G','H','J','K','L','M','W','X','C','V','B','N'],
+            number = azerty.indexOf(e.keyName) != -1 ? azerty.indexOf(e.keyName) + 1 : e.keyName
+        $('button').eq(number-1).click()
       })
     })
   </script>
