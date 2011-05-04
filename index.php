@@ -12,9 +12,10 @@
 <? foreach (glob('sounds/*.wav') as $sound) : ?>
     <li>
       <button>
-        <audio src="<?=htmlspecialchars($sound)?>" autobuffer></audio>
+        <audio src="<?=htmlspecialchars($sound)?>" autobuffer>
+          <a href="<?=htmlspecialchars($sound)?>"><?=htmlspecialchars($sound)?></a>
+        </audio>
         <?=htmlspecialchars(trim(preg_replace('/^[0-9]+|\.wav$|_+/i', ' ', basename($sound))))?>
-
       </button>
     </li>
 <? endforeach; ?>
