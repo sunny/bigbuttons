@@ -16,6 +16,7 @@
           <a href="<?=htmlspecialchars($sound)?>"><?=htmlspecialchars($sound)?></a>
         </audio>
         <?=htmlspecialchars(trim(preg_replace('/^[0-9]+|\.wav$|_+/i', ' ', basename($sound))))?>
+
       </button>
     </li>
 <? endforeach; ?>
