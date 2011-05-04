@@ -1,8 +1,8 @@
-ol.buttons {
+.bigbuttons {
   width: 1000px;
   margin: 1em auto;
 }
-  .buttons li {
+  .bigbuttons li {
     float: left;
     position: relative;
     color: #aaa;
@@ -11,7 +11,7 @@ ol.buttons {
     padding-top: 5px;
   }
 
-    .buttons button {
+    .bigbuttons button {
       cursor: pointer;
       width: 80px;
       height: 84px;
@@ -36,7 +36,7 @@ ol.buttons {
       box-shadow: 2px 2px 20px rgba(0,0,0,.9);
     }
 
-      .buttons button:focus {
+      .bigbuttons button:focus {
         outline: 1px solid rgba(0,0,0,.1);
         -webkit-outline-radius: 60px;
         -moz-outline-radius: 60px;
@@ -44,11 +44,11 @@ ol.buttons {
         outline-radius: 60px;
       }
 
-      .buttons button::-moz-focus-inner {
+      .bigbuttons button::-moz-focus-inner {
         border: none;
       }
 
-      .buttons button span {
+      .bigbuttons button span {
         color: grey;
         font-size: .9em;
         position: absolute;
@@ -56,20 +56,20 @@ ol.buttons {
         left: 48%;
       }
 
-      .buttons .active {
+      .bigbuttons .active {
         background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
         background: -moz-linear-gradient(-90deg, #555, #000);
       }
-      .buttons .active span {
+      .bigbuttons .active span {
         color: black;
       }
 
-    .buttons .dataunavailable,
-    .buttons .error {
+    .bigbuttons .dataunavailable,
+    .bigbuttons .error {
       opacity: .3;
     }
 
-    .buttons .playing {
+    .bigbuttons .playing {
       -webkit-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
       -moz-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
       -o-box-shadow: 2px 2px 20px rgba(150,0,0,.9);

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="bigbuttons.css" />
 </head>
 <body>
-  <ol class="buttons">
+  <ol class="bigbuttons">
 <? foreach (glob('sounds/*.wav') as $sound) : ?>
     <li>
       <button>
