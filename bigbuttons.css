@@ -1,0 +1,67 @@
+.buttons button {
+  cursor: pointer;
+  width: 80px;
+  height: 84px;
+  vertical-align:bottom;
+  color: white;
+  font: bold 13px/1 Helvetica, sans-serif;
+  margin: 10px;
+
+  border: 2px solid #333;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -o-border-radius: 40px;
+  border-radius: 40px;
+
+  background: black;
+  background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
+  background: -moz-linear-gradient(-90deg, #666, #000);
+
+  -webkit-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
+  -moz-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
+  -o-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
+  box-shadow: 2px 2px 20px rgba(0,0,0,.9)}
+
+.buttons button:focus {
+  outline: 1px solid rgba(0,0,0,.1);
+  -webkit-outline-radius: 60px;
+  -moz-outline-radius: 60px;
+  -o-outline-radius: 60px;
+  outline-radius: 60px}
+
+.buttons button::-moz-focus-inner {
+  border: none}
+
+.buttons button span {
+  color: grey;
+  font-size: .9em;
+  position: absolute;
+  top: 0;
+  left: 48%}
+
+.buttons .active {
+  background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
+  background: -moz-linear-gradient(-90deg, #555, #000)}
+.buttons .active span {
+  color: black}
+
+.buttons .dataunavailable,
+.buttons .error {
+  opacity: .3}
+
+.buttons .playing {
+  -webkit-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
+  -moz-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
+  -o-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
+  box-shadow: 2px 2px 20px rgba(150,0,0,.9)}
+
+.buttons ol {
+  width: 1000px;
+  margin:1em auto}
+.buttons li {
+  float:left;
+  position: relative;
+  color: #aaa;
+  font: 13px/1 Helvetica, sans-serif;
+  list-style: none;
+  padding-top: 5px}
