@@ -9,17 +9,17 @@
 </head>
 <body>
   <ol class="bigbuttons">
-<? foreach (glob('sounds/*.wav') as $sound) : ?>
+<?php foreach (glob('sounds/*.wav') as $sound) : ?>
     <li>
       <button>
-        <audio src="<?=htmlspecialchars($sound)?>" autobuffer>
-          <a href="<?=htmlspecialchars($sound)?>"><?=htmlspecialchars($sound)?></a>
+        <audio src="<?php echo htmlspecialchars($sound)?>" autobuffer>
+          <a href="<?php echo htmlspecialchars($sound)?>"><?php echo htmlspecialchars($sound)?></a>
         </audio>
-        <?=htmlspecialchars(trim(preg_replace('/^[0-9]+|\.wav$|_+/i', ' ', basename($sound))))?>
+        <?php echo htmlspecialchars(trim(preg_replace('/^[0-9]+|\.wav$|_+/i', ' ', basename($sound))))?>
 
       </button>
     </li>
-<? endforeach; ?>
+<?php endforeach; ?>
   </ol>
 </body>
 </html>
