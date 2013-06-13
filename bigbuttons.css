@@ -1,76 +1,113 @@
-.bigbuttons {
-  width: 1000px;
-  margin: 1em auto;
+html {
+  font-size: 11px;
 }
-  .bigbuttons li {
-    float: left;
-    position: relative;
-    color: #aaa;
-    list-style: none;
-    padding-top: 5px;
+
+body {
+  padding: 0;
+  margin: 2rem 2rem 1rem 2rem;
+  text-align: center;
+}
+
+.bigbuttons {
+  margin: 1rem auto;
+  padding: 0;
+  list-style: none;
+}
+
+.bigbuttons li {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+}
+
+/* Button */
+.bigbuttons button {
+  font: 1rem Arial, sans-serif;
+  text-align: center;
+
+  color: #777;
+  background: #f7f7f7 linear-gradient(#f7f7f7, #e7e7e7);
+
+  border: 1px solid #eee;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px #aaa, inset 0px 2px 3px #fff;
+
+  display: block;
+  position: relative;
+
+  margin: 2rem;
+  width: 10rem;
+  height: 10rem;
+  line-height: 10rem;
+}
+
+/* Circle around the button */
+.bigbuttons button:before {
+  content: "";
+  background: #fff;
+
+  border-top: 2px solid #ddd;
+  border-radius: 50%;
+  box-shadow: inset 0px 8px 50px #ddd;
+
+  display: block;
+  z-index: -1;
+
+  position: absolute;
+  top: -1.25rem;
+  left: -1.25rem;
+  bottom: -1.25rem;
+  right: -1.25rem;
+}
+
+/* Hover */
+.bigbuttons button:hover {
+  color: #555;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Focus */
+.bigbuttons button:focus {
+  outline: none;
+}
+.bigbuttons button::-moz-focus-inner {
+  border: none;
+}
+.bigbuttons button:focus:before {
+  border: 1px solid #333;
+}
+
+/* Playing */
+.bigbuttons button.playing:before {
+  box-shadow: inset 0px 0px 48px #667;
+}
+
+/* Errors */
+.bigbuttons .dataunavailable,
+.bigbuttons .error {
+  opacity: .5;
+}
+
+/* Letter to press */
+.bigbuttons .key {
+  color: #eee;
+  font-size: .9em;
+  position: absolute;
+  top: -7rem;
+  left: 48%;
+  transition: color .5s;
+}
+
+/* When 10 buttons */
+@media (min-width: 147rem) and (max-width: 161rem) {
+  .bigbuttons .key {
+    color: #444;
   }
+}
 
-    .bigbuttons button {
-      cursor: pointer;
-      width: 80px;
-      height: 84px;
-      vertical-align: bottom;
-      color: white;
-      font: bold 13px/1 Helvetica, sans-serif;
-      margin: 10px;
-
-      border: 2px solid #333;
-      -webkit-border-radius: 40px;
-      -moz-border-radius: 40px;
-      -o-border-radius: 40px;
-      border-radius: 40px;
-
-      background: black;
-      background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
-      background: -moz-linear-gradient(-90deg, #666, #000);
-
-      -webkit-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
-      -moz-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
-      -o-box-shadow: 2px 2px 20px rgba(0,0,0,.9);
-      box-shadow: 2px 2px 20px rgba(0,0,0,.9);
-    }
-
-      .bigbuttons button:focus {
-        outline: 1px solid rgba(0,0,0,.1);
-        -webkit-outline-radius: 60px;
-        -moz-outline-radius: 60px;
-        -o-outline-radius: 60px;
-        outline-radius: 60px;
-      }
-
-      .bigbuttons button::-moz-focus-inner {
-        border: none;
-      }
-
-      .bigbuttons button span {
-        color: grey;
-        font-size: .9em;
-        position: absolute;
-        top: 0;
-        left: 48%;
-      }
-
-      .bigbuttons .active {
-        background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
-        background: -moz-linear-gradient(-90deg, #555, #000);
-      }
-      .bigbuttons .active span {
-        color: black;
-      }
-
-    .bigbuttons .dataunavailable,
-    .bigbuttons .error {
-      opacity: .3;
-    }
-
-    .bigbuttons .playing {
-      -webkit-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
-      -moz-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
-      -o-box-shadow: 2px 2px 20px rgba(150,0,0,.9);
-      box-shadow: 2px 2px 20px rgba(150,0,0,.9);
-    }
+@media (max-width: 50rem) {
+  .bigbuttons .key {
+    color: #fff;
+  }
+}

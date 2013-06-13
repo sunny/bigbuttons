@@ -1,7 +1,6 @@
 jQuery(function($) {
   // Keyboard keys that press buttons
-  // For qwerty, use:
-  //   var keyboard = '1234567890QWERTYIOPASDFGHJKL;ZXCVBN'
+  // For qwerty use '1234567890QWERTYIOPASDFGHJKL;ZXCVBN'
   var keyboard = '1234567890AZERTYUIOPQSDFGHJKLMWXCVBN'
 
   // Assign a class temporarily to an item (defaults to 200ms)
@@ -26,51 +25,51 @@ jQuery(function($) {
     return $(this).keydown(function(e) {
       if (!e.ctrlKey && !e.metaKey) {
         e.keyString = keyString(e.keyCode)
+        e.keyIndex = keyboard.indexOf(e.keyString)
         return callback.call(this, e)
       }
     })
   }
 
-  $(document).ready(function() {
-    // Actions happen when audio plays
-    $('audio').live('dataunavailable', function() { $(this).parent().addClass('dataunavailable') })
-              .live('ended', function() { $(this).parent().removeClass('playing') })
-              .live('pause', function() { $(this).parent().removeClass('playing') })
-              .live('timeupdate', function() { $(this).parent().addClass('playing') })
-              .live('play', function() { $(this).parent().addClass('playing') })
-              .live('error', function() { $(this).parent().addClass('error') })
 
-              // new audio event to simplify restarting
-              .live('restart', function() {
-                if (this.currentTime)
-                  this.currentTime = 0
-                this.play()
-              })
+  // Clicking a button starts audio
+  $(document).on('click', 'button', function() {
+    $(this).temporaryClass('active')
+           .children('audio').trigger('playtoggle')
+  })
+
+  $(document).singleKeyDown(function(e) {
+    // Escape pauses
+    if (e.keyString === 'escape')
+      $('audio').each(function() { this.pause() })
+
+    // Keyboard presses buttons
+    else if (e.keyIndex != -1)
+      $('button').eq(e.keyIndex).click()
+  })
+
+  $(document).ready(function() {
+    var audios = $('audio'),
+        buttons = $('button')
+
+    audios.on('dataunavailable', function() { $(this).parent().addClass('dataunavailable') })
+    audios.on('play',            function() { $(this).parent().addClass('playing') })
+    audios.on('error',           function() { $(this).parent().addClass('error') })
+    audios.on('ended pause',     function() { $(this).parent().removeClass('playing') })
+
+    // custom audio event to simplify restarting
+    audios.on('playtoggle', function() {
+      if (this.paused) {
+        this.play()
+      } else {
+        this.currentTime = 0
+        this.pause()
+      }
+    })
 
     // Show the keyboard keys to press
-    $('button').each(function(i) {
-      if (i < keyboard.length)
-        $(this).append('<span>' + keyboard[i] + '</span>')
-    })
-
-    // Clicking a button starts audio
-    .live('click', function() {
-      $(this).temporaryClass('active')
-             .children('audio').trigger('restart')
-    })
-
-    $(document).singleKeyDown(function(e) {
-      // Escape pauses
-      if (e.keyString === 'escape') {
-        $('audio').each(function() { this.pause() })
-        return
-      }
-
-      // Keyboard presses buttons
-      var number = keyboard.indexOf(e.keyString)
-      if (number != -1)
-        $('button').eq(number).click()
-
+    $('button:lt('+keyboard.length+')').each(function(i) {
+      $(this).append('<span class="key">' + keyboard[i] + '</span>')
     })
   })
 
