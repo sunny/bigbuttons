@@ -19,7 +19,7 @@ Works with browsers that support HTML5 `<audio>` and the `wav` codec, that is Fi
 
 Apart from clicking you may also use your keyboard:
 
-- keys `1` tp `9` and letters
+- keys `1` to `9` and letters
 - `tab` through the buttons and press `enter` or `space`
 - `escape` key stops all currently playing sounds
 
